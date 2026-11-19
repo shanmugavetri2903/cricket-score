@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cricket Overs Tracker</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background-color: #e8f5e9;
+        }
+
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: green;
+        }
+
+        .score {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 20px;
+        }
+
+        button {
+            padding: 12px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Cricket Match Overs Tracker</h2>
+
+    <div class="score">
+        <p id="runs">Runs: 0</p>
+        <p id="wickets">Wickets: 0</p>
+        <p id="overs">Overs: 0.0</p>
+    </div>
+
+    <h3>Select Ball Outcome</h3>
+
+    <button onclick="updateScore(1)">+1 Run</button>
+    <button onclick="updateScore(2)">+2 Runs</button>
+    <button onclick="updateScore(4)">+4 Runs</button>
+    <button onclick="updateScore(6)">+6 Runs</button>
+
+    <br>
+
+    <button onclick="wicket()">Wicket</button>
+    <button onclick="dotBall()">Dot Ball</button>
+
+    <br><br>
+
+    <button onclick="resetScore()">Reset Score</button>
+
+</div>
+
+<script>
+
+    let totalRuns = 0;
+    let totalWickets = 0;
+    let totalBalls = 0;
+
+    // Update runs and balls
+    function updateScore(run) {
+
+        totalRuns = totalRuns + run;
+
+        totalBalls++;
+
+        displayScore();
+    }
+
+    // Update wicket count
+    function wicket() {
+
+        if (totalWickets < 10) {
+            totalWickets++;
+            totalBalls++;
+        }
+
+        displayScore();
+    }
+
+    // Record a dot ball
+    function dotBall() {
+
+        totalBalls++;
+
+        displayScore();
+    }
+
+    // Display the updated score
+    function displayScore() {
+
+        document.getElementById("runs").textContent =
+            "Runs: " + totalRuns;
+
+        document.getElementById("wickets").textContent =
+            "Wickets: " + totalWickets;
+
+        let overs = Math.floor(totalBalls / 6);
+        let balls = totalBalls % 6;
+
+        document.getElementById("overs").textContent =
+            "Overs: " + overs + "." + balls;
+    }
+
+    // Reset match score
+    function resetScore() {
+
+        totalRuns = 0;
+        totalWickets = 0;
+        totalBalls = 0;
+
+        displayScore();
+    }
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
